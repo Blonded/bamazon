@@ -11,3 +11,35 @@ price FLOAT,
 stock_quantity INT
 PRIMARY KEY (item_id),
 );
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES
+("Apple", "Produce", 1, 210),
+("Mango", "Produce", 3, 29),
+("La Croix", "Beverages", 2, 100),
+("Kombucha", "Beverages", 5, 37),
+("Hershey's Kisses", "Candy", 5, 45),
+("Reeses", "Candy", 5, 68),
+("Vanilla Candle", "Home", 12, 140),
+("Fur Blanket", "Home", 45, 80),
+("Apple Air", "Electronics", 20, 1200),
+("Flatscreen TV", "Electronics", 32, 1000);
+
+
+
+CREATE TABLE department (
+  department_id INT NOT NULL AUTO_INCREMENT,
+  department_name VARCHAR (200),
+  overhead FLOAT,
+  PRIMARY KEY (department_id),
+)
+
+INSERT INTO department (department_name, overhead)
+VALUES
+("Home", 950),
+("Electronics", 1200),
+("Candy", 500),
+("Beverages", 700),
+("Produce", 500),
+("Clothing", 900),
+("Food", 650);
