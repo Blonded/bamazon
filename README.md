@@ -1,5 +1,6 @@
-# Bamazon
-'Shopping' with mySQL
+# Bamazon 🛍️
+'Shopping' with mySQL.
+
 This is an app that takes in orders from customers and deletes stock from the current inventory.
 Runs through node.js, with connection to mySQL.
 
@@ -20,4 +21,4 @@ COMING SOON.
 
 ## Authors
 
-* **Lena Martinson** [Blonded](https://github.com/Blonded)
+* **Lena Martinson** - [Blonded](https://github.com/Blonded)
