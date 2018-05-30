@@ -31,3 +31,6 @@ COMING SOON.
 ## Authors
 
 * **Lena Martinson** - [Blonded](https://github.com/Blonded)
+
+## Resources
+* **sql - npm** - [sql cli-table](https://www.npmjs.com/package/cli-table2)
