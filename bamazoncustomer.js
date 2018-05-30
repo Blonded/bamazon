@@ -13,13 +13,30 @@ var connection = mysql.createConnection({
 
 connection.connect(function (err) {
     if (err) throw err;
-  //  start();
-  console.log('connnnnnnected');
-    // connection.end();
+   start();
+  // console.log('We're connected!');
 });
 
 
 function start(){
+  console.log("\n --------------------------- \n");
+  connection.query("SELECT FROM * products", function (err,response) {
+    if (err) throw err;
+      // console.log(response);
+    var productId = [];
+    for (var i = 0; i < response.length; i++){
+      productId.push(response[i]["item_id"]);
+    };
+  })
+
+  inquirer
+  .prompt ([
+    {
+      name: "id",
+      type: "input",
+      message: "What would you like to do?"
+    }
+  ])
 
 
   // The app should then prompt users with two messages.
