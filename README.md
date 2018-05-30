@@ -9,6 +9,11 @@ In order to run this application, be sure to install the npm packages listed:
 * mysql
 * cli-table2
 
+# Git ignore ⚠️
+Git ignore has been added to avoid uploading the node_modules that have been auto
+downloaded with the json packages. This makes it so you won't overload your github with
+extra files - slowing it down and taking up memory.
+
 ## Built With
 
 * [node.js]
