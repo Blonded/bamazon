@@ -8,8 +8,8 @@ item_id INT NOT NULL AUTO_INCREMENT,
 product_name VARCHAR(50) NULL,
 department_name VARCHAR (50) NULL,
 price FLOAT,
-stock_quantity INT
-PRIMARY KEY (item_id),
+stock_quantity INT,
+PRIMARY KEY (item_id)
 );
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
@@ -31,8 +31,8 @@ CREATE TABLE department (
   department_id INT NOT NULL AUTO_INCREMENT,
   department_name VARCHAR (200),
   overhead FLOAT,
-  PRIMARY KEY (department_id),
-)
+  PRIMARY KEY (department_id)
+);
 
 INSERT INTO department (department_name, overhead)
 VALUES
