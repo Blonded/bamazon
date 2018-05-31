@@ -13,17 +13,34 @@ var connection = mysql.createConnection({
 	password: "password",
 	database: "bamazon_DB"
 });
-
+var meh;
 
 connection.connect(function (err) {
     if (err) throw err;
-   start();
+   // directory();
+	 getCurrentVal("Reeses")
   // console.log('We're connected!');
 });
 
+function getCurrentVal(chicken) {
+	connection.query("SELECT * FROM products", function (err,response) {
+		// console.log("im listening")
+    if (err) throw err;
+		for (var i = 0 ; i < response.length; i++) {
+
+			if (response[i].product_name === chicken) {
+				meh = response[i].stock_quantity
+			}
+		}
+
+console.log(meh)
+
+  })
+}
+
 // start function: to prompt the user where they want to go, and what options
 // they have available to them.
-function start(){
+function directory(){
 	console.log("\n --------------------------- \n");
 	console.log("\n   !WELCOME TO BAMAZON!   \n");
 	console.log("\n --------------------------- \n");
@@ -55,20 +72,49 @@ function start(){
   })
 
 
+//====================PseudoCode====================
+//1. Make inquirer prompt that asks for quantity
+//2. grab values of item and how much they want (ex: answer. id && answer.quantity)
+//3. Query your db (like the read function in icecream. Find how much the user currently has of that item )
+//4. do an update (see also the icecream example, and subtract the user's input from the current value in the db)
+//Hint: meh - answers.quantity
 
+
+//====================PseudoCode====================
 // prompt the user with the navigated question
   inquirer
   .prompt ([
-    {
-      name: "id",
-      type: "input",
-      message: "What is the ID of the item you would like to purchase? [Quit with Q]"
-
-    }
-  ])
+{
+	name: "quit",
+	type: "list",
+	choices: ["yes", "no"],
+	message: "You tryna quit or somethin?"
 
 }
+,
+		{
+      name: "id",
+      type: "input",
+      message: "What is the ID of the item you would like to purchase? [Quit with Q]",
+			validate: function(value){
+				if(isNaN(value)=== false){
+					return true;
+				} else if (isNaN(value === true)) {
+					console.log("Please enter a valid ID number.");
+				}
+			}
+    }
+]).then(function(answer) {
 
+// then function here.
+console.log(answer.quit)
+if (answer.quit === "yes") {
+	quit();
+}
+
+
+}); // closes the function
+}
 
 function productPurchase(){
 // What is the id of the product you would like to purchase?
