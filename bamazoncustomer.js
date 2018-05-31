@@ -3,7 +3,7 @@
 // ALL packages are REQUIRED for this app to function properly.
 var mysql = require ("mysql");
 var inquirer = require("inquirer");
-var table = require("cli-table2");
+var Table = require('cli-table2');
 
 // creating connection with mysql, via local host
 var connection = mysql.createConnection({
@@ -30,26 +30,40 @@ function start(){
 
 
   // creating a connection to the sql documents products table, pulling data
-  connection.query("SELECT FROM * products", function (err,response) {
+  connection.query("SELECT * FROM products", function (err,response) {
     // if there is an error then it will throw an error,
     // if not it will log the response.
     if (err) throw err;
       // console.log(response);
 
-      // adding the products into an array so they are easier to select from
-    // var productId = [];
-    // for (var i = 0; i < response.length; i++){
-    //   productId.push(response[i]["item_id"]);
-    // };
+		// instantiate
+				var table = new Table({
+				    head: ['Item Id', 'Product Name', 'Department Name', 'Price', 'Stock Quantity'],
+						 colWidths: [30, 30, 30, 30, 30]
+				});
 
+
+    //   // adding the products into an array so they are easier to select from
+    for (var i = 0; i < response.length; i++){
+      table.push([response[i].item_id, response[i].product_name, response[i].department_name, response[i].price, response[i].stock_quantity] );
+    };
+
+
+
+		console.log(table.toString());
+	//
   })
+
+
+
 // prompt the user with the navigated question
   inquirer
   .prompt ([
     {
       name: "id",
       type: "input",
-      message: "What would you like to do?"
+      message: "What is the ID of the item you would like to purchase? [Quit with Q]"
+
     }
   ])
 
@@ -62,6 +76,16 @@ function productPurchase(){
 
 function productConsumerQuantity(){
   // How many units of this product would you like to buy?
+
+	// inquirer
+	// .prompt([
+	// 	{
+	// 		type: "input",
+	// 		name: "quantity",
+	// 		message: "What is the quantity of this product you would like to purchase?",
+	// 		validate: // validate function, users input
+	// 	}
+	// ])
 }
 
 function remainingProduct(){
