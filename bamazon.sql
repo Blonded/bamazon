@@ -43,3 +43,5 @@ VALUES
 ("Produce", 500),
 ("Clothing", 900),
 ("Food", 650);
+
+SELECT * FROM products

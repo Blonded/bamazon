@@ -24,7 +24,11 @@ connection.connect(function (err) {
 // start function: to prompt the user where they want to go, and what options
 // they have available to them.
 function start(){
-  console.log("\n --------------------------- \n");
+	console.log("\n --------------------------- \n");
+	console.log("\n   !WELCOME TO BAMAZON!   \n");
+	console.log("\n --------------------------- \n");
+
+
   // creating a connection to the sql documents products table, pulling data
   connection.query("SELECT FROM * products", function (err,response) {
     // if there is an error then it will throw an error,
@@ -33,10 +37,11 @@ function start(){
       // console.log(response);
 
       // adding the products into an array so they are easier to select from
-    var productId = [];
-    for (var i = 0; i < response.length; i++){
-      productId.push(response[i]["item_id"]);
-    };
+    // var productId = [];
+    // for (var i = 0; i < response.length; i++){
+    //   productId.push(response[i]["item_id"]);
+    // };
+
   })
 // prompt the user with the navigated question
   inquirer
@@ -50,8 +55,6 @@ function start(){
 
 }
 
-// The first should ask them the ID of the product they would like to buy.
-// The second message should ask how many units of the product they would like to buy.
 
 function productPurchase(){
 // What is the id of the product you would like to purchase?
@@ -60,6 +63,21 @@ function productPurchase(){
 function productConsumerQuantity(){
   // How many units of this product would you like to buy?
 }
+
+function remainingProduct(){
+
+  // Once the customer has placed the order, your application should check
+  // if your store has enough of the product to meet the customer's request.
+
+}
+
+// If not, the app should log a phrase like Insufficient quantity!,
+// and then prevent the order from going through.
+//
+// However, if your store does have enough of the product, you should fulfill the customer's order.
+//
+// This means updating the SQL database to reflect the remaining quantity.
+// Once the update goes through, show the customer the total cost of their purchase.
 
 
 
