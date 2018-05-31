@@ -38,8 +38,8 @@ function start(){
 
 		// instantiate
 				var table = new Table({
-				    head: ['Item Id', 'Product Name', 'Department Name', 'Price', 'Stock Quantity'],
-						 colWidths: [30, 30, 30, 30, 30]
+				    head: ['Id', 'Product Name', 'Department', 'Price', 'In-Stock'],
+						 colWidths: [4, 20, 15, 7, 14]
 				});
 
 
