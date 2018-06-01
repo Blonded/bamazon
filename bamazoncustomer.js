@@ -120,7 +120,7 @@ inquirer
 }
 	}
 ]);
-
+productConsumerQuantity();
 }
 
   // Function to decipher the quantity of the item that the customer wants
