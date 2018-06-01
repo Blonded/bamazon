@@ -50,11 +50,13 @@ function directory() {
 		});
 
 		for (var i = 0; i < response.length; i++) {
-			table.push([response[i].item_id, response[i].product_name, response[i].department_name, response[i].price, response[i].stock_quantity]);
+			table.push([response[i].item_id, response[i].product_name, response[i].department_name, response[i].stock_quantity, response[i].price]);
 		};
 		console.log(table.toString());
 		//give option for user to quit application before starting
-		optionalQuit();
+		// optionalQuit();
+		productConsumerQuantity();
+
 	})
 };
 //====================PseudoCode====================
@@ -176,7 +178,7 @@ function productConsumerQuantity() {
 
 				total = 0;
 				total += (getProdPrice() * answer.quantity)
-				console.log("Thanks for shopping, your total is $" + total)
+				console.log("\n Thanks for shopping, your total is $" + total + "\n");
 			}
 
 		})
