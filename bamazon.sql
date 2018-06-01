@@ -19,11 +19,11 @@ VALUES
 ("La Croix", "Beverages", 2, 100),
 ("Kombucha", "Beverages", 5, 37),
 ("Hershey's Kisses", "Candy", 5, 45),
-("Reeses", "Candy", 5, 68),
+("Reeses", "Candy", 4, 68),
 ("Vanilla Candle", "Home", 12, 140),
 ("Fur Blanket", "Home", 45, 80),
-("Apple Air", "Electronics", 20, 1200),
-("Flatscreen TV", "Electronics", 32, 1000);
+("Apple Air", "Electronics", 1200, 302),
+("Flatscreen TV", "Electronics", 1000, 32);
 
 
 

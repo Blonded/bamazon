@@ -45,12 +45,12 @@ function directory() {
 
 		// instantiate table (cli-table2)
 		var table = new Table({
-			head: ['Id', 'Product Name', 'Department', 'In-Stock', 'Price'],
+			head: ['Id', 'Product Name', 'Department','Price', 'In-Stock'],
 			colWidths: [4, 20, 15, 10, 7]
 		});
 
 		for (var i = 0; i < response.length; i++) {
-			table.push([response[i].item_id, response[i].product_name, response[i].department_name, response[i].stock_quantity, response[i].price]);
+			table.push([response[i].item_id, response[i].product_name, response[i].department_name,  response[i].price, response[i].stock_quantity]);
 		};
 		console.log(table.toString());
 		//give option for user to quit application before starting
@@ -147,7 +147,7 @@ function productConsumerQuantity() {
 						}
 					}
 				}
-			
+
 
 			if (answer.quantity > itemQuant) {
 				console.log("Sorry, we have an insufficient amount of that item.")
@@ -171,6 +171,7 @@ function productConsumerQuantity() {
 						if (err) throw err;
 						else {
 							console.log("Your items been added!");
+							directory();
 							optionalQuit();
 						}
 					}
