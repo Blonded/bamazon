@@ -45,8 +45,8 @@ function directory() {
 
 		// instantiate table (cli-table2)
 		var table = new Table({
-			head: ['Id', 'Product Name', 'Department', 'Price', 'In-Stock'],
-			colWidths: [4, 20, 15, 7, 14]
+			head: ['Id', 'Product Name', 'Department', 'In-Stock', 'Price'],
+			colWidths: [4, 20, 15, 10, 7]
 		});
 
 		for (var i = 0; i < response.length; i++) {
