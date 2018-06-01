@@ -118,7 +118,7 @@ function productConsumerQuantity() {
 				}
 			}
 		]).then(function (answer) {
-			console.log("wat", answer.id)
+			// console.log(answer.id)
 			// getCurrentVal(answer.id)
 
 
@@ -136,8 +136,14 @@ function productConsumerQuantity() {
 
 				}
 
-				function getProdPrice() {
 
+				function getProdPrice() {
+					for (var i = 0; i < response.length; i++) {
+
+						if (response[i].item_id === parseInt(answer.id)) {
+							return response[i].price;
+						}
+					}
 				}
 			
 
