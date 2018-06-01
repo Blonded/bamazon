@@ -20,10 +20,23 @@ extra files - slowing it down and taking up memory.
 * [mySQL]
 * [JavaScript]
 
+
+![Screenshot](preview-bamazon.png)
+
 ## Sample of Code
 
+Below I created a new table, adding it to the constructor function so I am able to display
+the results from the MySQL table I created.
+
 ```
-COMING SOON.
+var table = new Table({
+  head: ['Id', 'Product Name', 'Department','Price', 'In-Stock'],
+  colWidths: [4, 20, 15, 7, 10]
+});
+
+for (var i = 0; i < response.length; i++) {
+  table.push([response[i].item_id, response[i].product_name, response[i].department_name,  response[i].price, response[i].stock_quantity]);
+};
 
 ```
 
@@ -31,6 +44,7 @@ COMING SOON.
 ## Authors
 
 * **Lena Martinson** - [Blonded](https://github.com/Blonded)
+* **Sasha** - [Sasha Patsel](https://github.com/sashapatsel)
 
 ## Resources
 * **sql - npm** - [sql cli-table](https://www.npmjs.com/package/cli-table2)
