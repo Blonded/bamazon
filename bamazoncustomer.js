@@ -5,6 +5,8 @@ var mysql = require ("mysql");
 var inquirer = require("inquirer");
 var Table = require("cli-table2");
 
+var total = 0;
+
 // creating connection with mysql, via local host
 var connection = mysql.createConnection({
 	host:"localhost",
@@ -13,18 +15,21 @@ var connection = mysql.createConnection({
 	password: "password",
 	database: "bamazon_DB"
 });
+
+//global reusable variable with no value.
 var itemChosen;
+
 
 connection.connect(function (err) {
     if (err) throw err;
     directory();
-	 getCurrentVal("Reeses")
+	 getCurrentVal();
   // console.log('We're connected!');
 });
 
 function getCurrentVal(product) {
 	connection.query("SELECT * FROM products", function (err,response) {
-		// console.log("im listening")
+
     if (err) throw err;
 		for (var i = 0 ; i < response.length; i++) {
 
@@ -38,8 +43,7 @@ function getCurrentVal(product) {
   })
 }
 
-// start function: to prompt the user where they want to go, and what options
-// they have available to them.
+// function to display the table and it's items results
 function directory(){
 
 	console.log("\n --------------------------- \n");
@@ -53,7 +57,7 @@ function directory(){
     if (err) throw err;
       // console.log(response);
 
-		// instantiate
+		// instantiate table (cli-table2)
 				var table = new Table({
 				    head: ['Id', 'Product Name', 'Department', 'Price', 'In-Stock'],
 						 colWidths: [4, 20, 15, 7, 14]
@@ -63,6 +67,7 @@ function directory(){
       table.push([response[i].item_id, response[i].product_name, response[i].department_name, response[i].price, response[i].stock_quantity]);
     };
 		console.log(table.toString());
+		//give option for user to quit application before starting
 		optionalQuit();
   })
 };
@@ -96,21 +101,8 @@ function optionalQuit(){
 	});
 } // closes the function
 
-
-		// {
-    //   name: "id",
-    //   type: "input",
-    //   message: "What is the ID of the item you would like to purchase?",
-		// 	validate: function(value){
-		// 		if(isNaN(value)=== false){
-		// 			return true;
-		// 		} else if (isNaN(value === true)) {
-		// 			console.log("Please enter a valid ID number.");
-		// 		}
-		// 	}
-    // }
-
-
+// function to prompt the user on what id of
+// the item they would like to purchase
 function productPurchase(){
 // What is the id of the product you would like to purchase?
 inquirer
@@ -118,7 +110,7 @@ inquirer
 	{
 	name: "id",
 	type: "input",
-	message: "What is the ID of the item you would like to purchase?",
+	message: "\n What is the ID of the item you would like to purchase? \n",
 	validate: function(value){
 		if(isNaN(value) === false){
 			return true;
@@ -128,41 +120,59 @@ inquirer
 }
 	}
 ]);
+
 }
 
+  // Function to decipher the quantity of the item that the customer wants
 function productConsumerQuantity(){
-  // How many units of this product would you like to buy?
-
-	// inquirer
-	// .prompt([
-	// 	{
-	// 		type: "input",
-	// 		name: "quantity",
-	// 		message: "What is the quantity of this product you would like to purchase?",
-	// 		validate: // validate function, users input
-	// 	}
-	// ])
+	inquirer
+	.prompt([
+		{
+			type: "input",
+			name: "quantity",
+			message: "\n What is the quantity of this product you would like to purchase? \n",
+			validate: function(value){
+				if(isNaN(value) === false){
+					return true;
+				} else if (isNaN(value === true)) {
+					console.log("\n Please enter a number. \n");
+					return false;
+				}
+		}
+		}
+	]).then(function(answer){
+		if (answer.quantity > response[answer.item_id - 1].stock_quantity){
+			console.log("Sorry, we have an insufficient amount of that item.")
+			optionalQuit();
+		} else {
+			connection.query(
+				"UPDATE products SET ? WHERE ?",
+				[
+					{
+						stock_quantity:
+						(response[answer.item_id - 1].stock_quantity - parseInt(answer.amount)),
+						sales:
+						(response[answer.item_id - 1].stock_quantity + parseInt(answer.amount))
+					},
+					{
+						item_id: answer.item_id
+					}
+				],
+				function (err){
+					if (err) throw error;
+					else{
+						console.log("Your items been added!");
+						optionalQuit();
+					}
+				}
+			)
+			total += (response[answer.item_ID - 1].price * answer.amount)
+		}
+	})
 };
 
-function remainingProduct(){
 
-  // Once the customer has placed the order, your application should check
-  // if your store has enough of the product to meet the customer's request.
-
-};
-
-// If not, the app should log a phrase like Insufficient quantity!,
-// and then prevent the order from going through.
-//
-// However, if your store does have enough of the product, you should fulfill the customer's order.
-//
-// This means updating the SQL database to reflect the remaining quantity.
-// Once the update goes through, show the customer the total cost of their purchase.
-
-
-
-
-
+// a function to quit and thanks for using bamazon!
 function quit() {
     console.log("\n --------------------------------- \n");
     console.log("Thanks for using *Bamazon* !");
