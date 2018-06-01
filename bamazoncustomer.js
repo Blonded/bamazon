@@ -82,7 +82,7 @@ function optionalQuit() {
 			if (answer.quit === "yes") {
 				quit();
 			} else {
-				productConsumerQuantity();
+			directory();
 			}
 		});
 } // closes the function
@@ -171,7 +171,6 @@ function productConsumerQuantity() {
 						if (err) throw err;
 						else {
 							console.log("Your items been added!");
-							directory();
 							optionalQuit();
 						}
 					}
