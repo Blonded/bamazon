@@ -43,7 +43,7 @@ for (var i = 0; i < response.length; i++) {
 
 ## Authors
 
-* **Lena Martinson** - [Blonded](https://github.com/Blonded)
+* **Lena Blonded** - [Blonded](https://github.com/Blonded)
 * **Sasha** - [Sasha Patsel](https://github.com/sashapatsel)
 
 ## Resources
